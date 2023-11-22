@@ -9,8 +9,9 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+first-crud-hibernate/target
 
-# External tool builders
+tool builders
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
