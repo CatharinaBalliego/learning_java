@@ -1,11 +1,8 @@
 package com.catharina.customer.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.sql.Date;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="customer_tb")
@@ -14,24 +11,71 @@ public class Customer {
 	@Id
 	@Column(name="customer_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer id;
 	
 	@Column(name="customer_name")
-	private String Name;
+	private String name;
 	
+	@ManyToOne 
+	@JoinColumn(name="customer_type_id")
+	private CustomerType customerType;
+	
+	@Column(name="company_code")
+	private Integer companyCode;
+
+	@Column(name="register_dt")
+	private Date registerDate;
+	
+	@Column(name="modification_dt")
+	private Date modificationDate;
+
 	public Integer getId() {
-		return Id;
-	}
-	public void setId(Integer id) {
-		Id = id;
-	}
-	public String getName() {
-		return Name;
-	}
-	public void setName(String name) {
-		Name = name;
+		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public CustomerType getCustomerType() {
+		return customerType;
+	}
+
+	public void setCustomerType(CustomerType customerType) {
+		this.customerType = customerType;
+	}
+
+	public Integer getCompanyCode() {
+		return companyCode;
+	}
+
+	public void setCompanyCode(Integer companyCode) {
+		this.companyCode = companyCode;
+	}
+
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+
+	public void setRegisterDate(Date registerDate) {
+		this.registerDate = registerDate;
+	}
+
+	public Date getModificationDate() {
+		return modificationDate;
+	}
+
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
+	}
 	
 	
 	
