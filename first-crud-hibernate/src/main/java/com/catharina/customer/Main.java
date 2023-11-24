@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.catharina.customer.CRUD.ReadOperations;
 import com.catharina.customer.model.Customer;
 
 public class Main {
@@ -17,8 +18,18 @@ public class Main {
 		Customer customer = entityManager.find(Customer.class, 1);
 		System.out.println(customer.getName());
 		
-		//insert
+		System.out.println("all customers");
+		ReadOperations.getAllCustomers(entityManager);
+
+		System.out.println("customers' name");
+		ReadOperations.getCustomersName(entityManager);
 		
+		System.out.println("get customerType single result");
+		ReadOperations.getCustomerTypeFromCustomer(entityManager);
+		
+		System.out.println("custom columns");
+		ReadOperations.getCustomersCustomColumns(entityManager);
+		//insert
 //		Customer amazon = new Customer();
 //		amazon.setName("Amazon");
 //		
@@ -35,13 +46,13 @@ public class Main {
 			
 		
 		//update
-		Customer federzoni = entityManager.find(Customer.class, 1);
-		federzoni.setName(federzoni.getName() + " BR");
-		
-		entityManager.getTransaction().begin();
-		entityManager.persist(federzoni);
-		entityManager .getTransaction().commit();
-		
+//		Customer federzoni = entityManager.find(Customer.class, 1);
+//		federzoni.setName(federzoni.getName() + " BR");
+//		
+//		entityManager.getTransaction().begin();
+//		entityManager.persist(federzoni);
+//		entityManager .getTransaction().commit();
+//		
 		entityManager.close();
 		entityManagerFactory.close();
 
