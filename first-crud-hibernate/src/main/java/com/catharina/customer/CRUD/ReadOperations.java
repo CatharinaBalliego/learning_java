@@ -39,4 +39,12 @@ public abstract class ReadOperations {
 		customAtt.forEach(c -> System.out.println(String.format("%s, %s", c)));
 	}
 	
+	public static void findById(EntityManager entityManager, Integer id) {
+		String jpql = "select c from Customer c where c.id = :id";
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(jpql, Customer.class);
+		typedQuery.setParameter("id", id);
+		Customer customer = typedQuery.getSingleResult();
+		System.out.println(customer);
+		
+	}
 }

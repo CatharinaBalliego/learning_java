@@ -29,6 +29,9 @@ public class Main {
 		
 		System.out.println("custom columns");
 		ReadOperations.getCustomersCustomColumns(entityManager);
+		
+		System.out.println("find by id");
+		ReadOperations.findById(entityManager, 3);
 		//insert
 //		Customer amazon = new Customer();
 //		amazon.setName("Amazon");
