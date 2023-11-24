@@ -1,5 +1,7 @@
 package com.catharina.customer;
 
+import java.util.Arrays;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -27,11 +29,25 @@ public class Main {
 		System.out.println("get customerType single result");
 		ReadOperations.getCustomerTypeFromCustomer(entityManager);
 		
+		System.out.println("find by customer type id");
+		ReadOperations.findByCustomerTypeId(entityManager, 4);
+		
 		System.out.println("custom columns");
 		ReadOperations.getCustomersCustomColumns(entityManager);
 		
 		System.out.println("find by id");
 		ReadOperations.findById(entityManager, 3);
+		
+		
+		System.out.println("Find by name with like");
+		ReadOperations.findByName(entityManager, "Da");
+		
+		System.out.println("Find by list id");
+		ReadOperations.findByListId(entityManager, Arrays.asList(3,7));
+		
+		
+		System.out.println("Pagination");
+		ReadOperations.pagination(entityManager, 2, 2);
 		//insert
 //		Customer amazon = new Customer();
 //		amazon.setName("Amazon");

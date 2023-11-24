@@ -1,5 +1,6 @@
 package com.catharina.customer.CRUD;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -47,4 +48,62 @@ public abstract class ReadOperations {
 		System.out.println(customer);
 		
 	}
+	
+
+	
+	//inner join
+	public static void findByCustomerTypeId(EntityManager entityManager, Integer id) {
+		String jpql = "select c from Customer c join c.customerType ct where ct.id = :id";
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(jpql, Customer.class);
+		typedQuery.setParameter("id", id);
+		List<Customer> customer = typedQuery.getResultList();
+		customer.stream().forEach(System.out::println);
+		
+		
+	}
+	
+	//filtering results
+	
+	
+	//like
+	public static void findByName(EntityManager entityManager, String name) {
+		String jpql = "select c from Customer c where c.name like concat(:cname, '%')"; //starts with
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(jpql, Customer.class);
+		typedQuery.setParameter("cname", name);
+		List<Customer> customers = typedQuery.getResultList();
+		customers.stream().forEach(System.out::println);
+	}
+	
+	//between
+	
+	public static void registerBetween(EntityManager entityManager) {
+		String jpql = "select c from Customer c where c.registerDate between :yesterday and :today";
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(jpql, Customer.class);
+		typedQuery.setParameter("yesterday", LocalDateTime.now().minusDays(1));
+		typedQuery.setParameter("today", LocalDateTime.now());
+		List<Customer> customers = typedQuery.getResultList();
+		customers.stream().forEach(System.out::println);
+	}
+	
+	//in
+	public static void findByListId(EntityManager entityManager, List<Integer> ids) {
+		String jpql = "select c from Customer c where c.id in (:ids)";
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(jpql, Customer.class);
+		typedQuery.setParameter("ids", ids);
+		List<Customer> customers = typedQuery.getResultList();
+		customers.stream().forEach(System.out::println);
+		
+	}
+	
+	//pagination
+	
+	public static void pagination(EntityManager entityManager, int startIndex, int maxResults) {
+		String jpql = "select c from Customer c";
+		TypedQuery<Customer> tq = entityManager.createQuery(jpql, Customer.class)
+				.setFirstResult(startIndex)
+				.setMaxResults(maxResults);
+		tq.getResultList().stream().forEach(System.out::println);;
+		
+	}
+	
 }
