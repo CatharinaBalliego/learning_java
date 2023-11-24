@@ -73,6 +73,12 @@ public class Customer {
 		return modificationDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", customerType=" + customerType + ", companyCode="
+				+ companyCode + ", registerDate=" + registerDate + ", modificationDate=" + modificationDate + "]";
+	}
+
 	public void setModificationDate(Date modificationDate) {
 		this.modificationDate = modificationDate;
 	}

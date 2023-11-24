@@ -44,7 +44,7 @@ public class CustomerType {
 
 	@Override
 	public String toString() {
-		return "CustomerType [id=" + id + ", name=" + name + ", customers=" + customers + "]";
+		return "CustomerType [id=" + id + ", name=" + name + "]";
 	}
 
 
