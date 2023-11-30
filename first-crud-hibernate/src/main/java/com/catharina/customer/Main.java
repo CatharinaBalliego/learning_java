@@ -17,6 +17,7 @@ public class Main {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//reading data
+		/*
 		Customer customer = entityManager.find(Customer.class, 1);
 		System.out.println(customer.getName());
 		
@@ -48,6 +49,20 @@ public class Main {
 		
 		System.out.println("Pagination");
 		ReadOperations.pagination(entityManager, 2, 2);
+		
+		*/
+		
+		System.out.println("Criteria");
+		ReadOperations.criteria(entityManager);
+		
+		System.out.println("Criteria -  ID");
+		ReadOperations.criteriaGetById(entityManager, 5);
+		
+		
+		System.out.println("Criteria -  customer type");
+		ReadOperations.criteriaChooseReturnType(entityManager);
+		
+		
 		//insert
 //		Customer amazon = new Customer();
 //		amazon.setName("Amazon");

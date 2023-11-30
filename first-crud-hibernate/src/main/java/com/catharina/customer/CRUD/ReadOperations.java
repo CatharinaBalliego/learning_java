@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import com.catharina.customer.model.Customer;
 import com.catharina.customer.model.CustomerType;
@@ -106,4 +109,49 @@ public abstract class ReadOperations {
 		
 	}
 	
+	
+	
+	// ----------------------------- CRITERIA ------------------------------------------------
+	
+	/* Advantages:
+	 * No query knowledge is necessary
+	 * more performatic than JPQL. No casting neeeded.
+	 */
+	
+	public static void criteria(EntityManager entityManager) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Customer> criteriaQuery = criteriaBuilder.createQuery(Customer.class);
+		Root<Customer> root = criteriaQuery.from(Customer.class);
+		
+		criteriaQuery.select(root);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("name")));
+		
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(criteriaQuery);
+		List<Customer> customers = typedQuery.getResultList();
+		customers.forEach(System.out::println);
+	}
+	
+	public static void criteriaChooseReturnType(EntityManager entityManager) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<CustomerType> cq = cb.createQuery(CustomerType.class);
+		Root<Customer> root = cq.from(Customer.class);
+		cq.select(root.get("customerType"));
+		
+		TypedQuery<CustomerType> typedQuery = entityManager.createQuery(cq);
+		List<CustomerType> ct = typedQuery.getResultList();
+		ct.forEach(System.out::println);
+		
+	}
+	
+	public static void criteriaGetById(EntityManager entityManager, int Id) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
+		Root<Customer> root = cq.from(Customer.class);
+		cq.select(root);
+		cq.where(cb.equal(root.get("id"), Id));
+		
+		TypedQuery<Customer> typedQuery = entityManager.createQuery(cq);
+		Customer customer = typedQuery.getSingleResult();
+		System.out.println(customer);
+	}
 }
